@@ -37,6 +37,7 @@ class Frame(object):
         if sum(self.throws) + pins > 10:
             raise ValueError(f'A frame\'s rolls cannot exceed 10 pins.')
         self.throws.append(pins)
+
         
 class BowlingGame(object):
     """BowlingGame"""
@@ -104,12 +105,6 @@ class BowlingGame(object):
                 raise IndexError(f'two bonus rolls must be taken.')  # noqa
         return sum(frame.score(self.next_throws(frame.id))
                    for frame in self.frames)
-
-pins = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
-
-player_1 = Frame(0)
-
-player_1.roll(pins)
 
 
 
