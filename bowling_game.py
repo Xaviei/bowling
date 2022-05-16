@@ -1,4 +1,6 @@
 
+
+
 class Frame(object):
     """Frame"""
 
@@ -41,7 +43,35 @@ class Frame(object):
             raise ValueError(f'A frame\'s rolls cannot exceed 10 pins.')
         self.throws.append(pins)
 
+
+
+
+
+
+class Player(object):
+    """Player"""
+    def __init__(self):
+        self.score = [Frame.score]
+        self.roll = [Frame.roll()]
+        self.frames = [Frame]
+        self.throws = []
+    
+    def throws(self):
+        pins = int(input)('Enter pins knocked down')
+        if pins < 0:
+            raise ValueError(f'Cannot enter Negative number')
+        if pins > 10:
+            raise ValueError(f'Stop playing, there arent even 10 pins in a lane')
+        if pins == 10:
+            Frame.is_strike
+
         
+
+        
+        
+        
+
+
 
         
 class BowlingGame(object):
@@ -51,6 +81,9 @@ class BowlingGame(object):
         self.bonus_throws = []
         self.frames = [Frame(i) for i in range(10)]
         self.frame_num = 0
+        
+
+            
     
     @property
     def crnt_frame(self): #shows current frame
@@ -110,9 +143,5 @@ class BowlingGame(object):
                    for frame in self.frames)
 
 
-f = Frame(0)
-bowl = BowlingGame()
-
-bowl()
-
+print(BowlingGame.score(0))
 
