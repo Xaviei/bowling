@@ -1,6 +1,4 @@
 
-
-
 class Frame(object):
     """Frame"""
 
@@ -10,19 +8,16 @@ class Frame(object):
         self.throws = []
 
     @property
-    def is_done(self):
+    def is_open(self):
         return sum(self.throws) == 10 or len(self.throws) == 2
     
     @property
     def is_strike(self):
-        print('strike!')
         return sum(self.throws) == 10 and len(self.throws) == 1
     
     
     @property
     def is_spare(self):
-
-        print('Nice Spare')
         return sum(self.throws) == 10 and len(self.throws) == 2
 
     
@@ -42,37 +37,6 @@ class Frame(object):
         if sum(self.throws) + pins > 10:
             raise ValueError(f'A frame\'s rolls cannot exceed 10 pins.')
         self.throws.append(pins)
-
-
-
-
-
-
-class Player(object):
-    """Player"""
-    def __init__(self):
-        self.score = [Frame.score]
-        self.roll = [Frame.roll()]
-        self.frames = [Frame]
-        self.throws = []
-    
-    def throws(self):
-        pins = int(input)('Enter pins knocked down')
-        if pins < 0:
-            raise ValueError(f'Cannot enter Negative number')
-        if pins > 10:
-            raise ValueError(f'Stop playing, there arent even 10 pins in a lane')
-        if pins == 10:
-            Frame.is_strike
-
-        
-
-        
-        
-        
-
-
-
         
 class BowlingGame(object):
     """BowlingGame"""
@@ -82,9 +46,6 @@ class BowlingGame(object):
         self.frames = [Frame(i) for i in range(10)]
         self.frame_num = 0
         
-
-            
-    
     @property
     def crnt_frame(self): #shows current frame
         return self.get_frame(self.frame_num)
@@ -123,11 +84,13 @@ class BowlingGame(object):
     def roll(self, pins):
         if pins > 10:
             raise ValueError(f'Stop playin!')
+        if pins < 10:
+            raise ValueError(f'exceeded frame limit')
         if self.frame_num == 10:
             self.handle_bonus_throw(pins)
         else:
             self.crnt_frame.roll(pins)
-            if self.crnt_frame.is_done:
+            if self.crnt_frame.is_open:
                 self.frame_num += 1
    
     def score(self):
@@ -142,6 +105,13 @@ class BowlingGame(object):
         return sum(frame.score(self.next_throws(frame.id))
                    for frame in self.frames)
 
+pins = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
 
-print(BowlingGame.score(0))
+player_1 = Frame(0)
+
+player_1.roll(pins)
+
+
+
+
 
